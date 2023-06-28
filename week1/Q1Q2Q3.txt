@@ -1,0 +1,32 @@
+<Q1,Q2,Q3>
+
+// Q1 //
+a. val id = 9527                                       // 正確，Kotlin 會「自動推斷變數型態」
+b. var number : Int = 5.6        	               // 錯誤，number 給定為「Int」，但是賦值 5.6 是為「Double」
+c. var title = "Hello Kotlin!"                         // 正確，Kotlin 會「自動推斷變數型態」
+d. val content : String = null      	               // 錯誤，在 Kotlin 中給字串值後，就不能再給他「null」，因為一開還沒做任何說明定義時，
+				                          這個字串就已經在 Kotlin 裡面是一個「不得為 null 的值」，此時若要賦予新值「null」給他，
+				                          則會顯示「Null acn not be value」。如果要希望允許一個字串是 null 的話就要做一個特別的
+				                          標示「?」，代表允許可以放「null」。
+e. val number : Double? = 556.6                        // 正確，Double? 代表可以放「Double」或是「null」，而 556.6 為 Double
+f. var list: List<String>? = listOf(null, null)        // 錯誤，「？」應該放在 String 後面，這樣 List 才能放 null
+g. var list: List<String?>? = listOf("Wayne", "Chen")  // 正確，內層問號代表 listOf 中可以放 String 或是 null，外層問號代表變數 list 可以
+							  放 List<String?> 或是 null
+h. list.size                                           // 錯誤，因為 list 變數沒有定義，就算是接續題目中的「g.」也要在 list後面加上「?」
+i. list?.size                                          // 錯誤，因為 list 變數沒有定義，但如果是接續題目中的「g.」就是對的沒問題
+
+
+
+// Q2 //
+答案是 c
+因為 message 內包含英文、空格、標點共 39 個。
+
+
+
+// Q3 //
+答案是 d
+Array(6)，意即創建一個 6 個元素的陣列，後面的 {} 可以給定這個 Array 每個元素的初始值，
+it 為該元素的 index，在這邊就是 0~5，而pow 為 Math 類別中的一個方法，作為「次方」的功能，
+也就是第一個元素是 1000.0^0 第二個元素是 1000.0^1 以此類推
+
+
