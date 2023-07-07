@@ -1,0 +1,108 @@
+<Q1,Q2,Q3,Q4,Q5,Q6>
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+// Q1 // What is Inheritance? Try to explain in Mandarin.
+
+「繼承」代表當我寫一個類別的時候，不需要什麼都自己寫，我可以找到一個上層的類別來繼承，上層類別又稱「父類別」或 Base class 或 Super class ，
+其概念有點像是「家族」，我繼承你之後，你身上的屬性、方法我不用重複去設計就可以使用，而下層類別又稱「子類別」或 Sub class 或 Derivded class。
+如果類別沒有明確寫繼承哪個類別的話，它預設是繼承 Object（Java.lang）類別，繼承是用「extends」關鍵字，寫在類別名稱後面。
+
+
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+// Q2 // How to split a string in Android? Explain your understanding, and even better to attach some sample code.
+
+「split()」用於拆分字串，將「分隔符號」作為參數，去分割字串。譬如說得到一份資料是一大串「字串」，但是用重複的符號做分割，此時就可以用 split() 
+去切割該「字串」成為一個 List。
+
+	fun main(args: Array<String>) {
+	    val scores = "80::90::75::63::77"
+	    val scoresList = scores.split("::")  // 這邊會出現提示說 scoresList 是 List<String>
+	
+	    // 知道是 List 後就可以用 index 訪問內容，或是用 for 也可以
+	    println(scoresList)            // [80, 90, 75, 63, 77]
+	    println(scoresList[0])         // 88
+	    println(scoresList.get(2))     // 75
+	    for (score in scoresList) {
+        	println(score)
+	    }
+	}
+
+
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+// Q3 // What kind of key-value pair collection do we use in Android? Attach a sample code that uses for-loop to print each key-value pair.
+
+可以儲存多筆資料的類別「Collection 集合」包含了三大種類，分別是「List」和「Set」和「Map」，而 key-value pair 要使用「Map<Key,Value> 集合」，
+其中一筆資料中包含兩樣東西，一個是「Key 鍵值」，鍵值是不能重複的，另一個就是鍵值所對應到的「Value」，使用上一樣是使用「HashMAp」，而在加入資料時，並不是
+用 .add 方法，要使用 [鍵值]="value" 的方式，並且一次就要給它「鍵值+Value」，而且資料並無「順序」所以也沒有 index 值。
+
+	fun main(args: Array<String>) {
+	    // 以股票代號為例
+	    val stocks = HashMap<String, String>()
+	    stocks["2330"] = "台積電"
+	    stocks["2317"] = "鴻海"
+	    stocks["2330"] = "TSMC"     // 如果鍵值重複，value 會被覆蓋
+	    println(stocks)             // {2317=鴻海, 2330=TSMC}
+	
+	    // 可以用 [鍵值] 來得到 value
+	    println(stocks["2330"])     // TSMC
+	
+	    // 然而因為沒有順序和 index，所以可以用 for-loop 來從頭到尾拜訪一遍資料
+	    for ((key) in stocks) {
+	        println("$key: ${stocks[key]}")
+	    }
+	}
+
+
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+// Q4 //
+4. What’s the difference between ArrayList and LinkedList? Try to explain in Mandarin.
+
+<「存處」的差異>
+ArratList 的「存儲」是「動態數組」，而 LinkedList 的「存儲」是「雙向循環鏈表」。
+
+<「修改速度」的差異>
+ArratList 的修改較慢，以下圖為例，如果要在 [a] 和 [dd] 之間新增一個元素，就要移動後面的 [dd] 和 [7a]，因為內存要求連續，所以要移動內存。
+LinkedList 的修改較快，以下圖為例，如果要在 [a] 和 [dd] 之間新增一個元素，只將 [a] 後面的節點指向「新元素」，並將 [dd] 往前指向「新元素」即可，內存不要求連續，所以不用移動內存。
+	
+	
+		  <-        <-       <-        <-
+ Linked 鏈表：[2]  ->  [23]  ->  [a]  ->  [dd]  ->  [7a]
+
+
+  Array 數組：[2]      [23]      [a]      [dd]      [7a]
+	        0         1        2         3        4
+
+
+<「作用」的差異>
+ArratList 只能作用為「List」。
+LinkedList 可以做為「List」和「Deque」。
+
+
+<「查找時間複雜度」的差異>
+ArratList 因為是數組所以有「index 值」，所以可以更好更快的訪問元素，查找速度快，時間複雜度為 O(1)。
+LinkedList 要從頭開始一個一個查找元素，查找速度慢，時間複雜度為 O(n)。
+
+
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+// Q5 //
+5. What are Value Type variables? List out the Value Type variables you know.
+
+實值型別(Value Type)，若某物件為實值型別，則此物件存放的值即為該物件實際的值。換句話說，若某變數 A 為實值型別，則 A 的記憶體位址存放的值即為此變數A的值。
+
+「Int」、「Long」、「Double」、「Float」、「Boolean」、「Char」、「Byte」、「Short」、
+「String」、「Array」、「Enum」
+
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+// Q6 //
+6. What’s the maximum value of Int? If you want to represent integers larger than the limit,
+what should you do instead of using int variables?
+
+Kotlin 中屬於整數型態的有：
+
+	Byte 範圍為: -128 ~ 127
+	Short 範圍為: -32768 ~ 32767
+	Int 範圍為: -2147483648 ~ 2147483647
+	Long 範圍為: -9223372036854775808 ~ 9223372036854775807
+
+所以 Int 的最大範圍為「2147483647」32位寬，要超過的話可以用 Long，最多可到「9223372036854775807」64位寬。
+
+
