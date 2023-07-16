@@ -1,0 +1,85 @@
+<Q1,Q2,Q3,Q4,Q5>
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+// Q1 // What is Encapsulation? Try to list out the benefits of Encapsulation.
+
+「Encapsulation 封裝」是另一個軟體設計的概念，其好處有：
+1. 可以限制其他類別對物件內容的直接訪問
+2. 可以修改我們寫的程式碼而又不會破壞其他人使用我們的代碼
+3. 程式碼具有可維護性、靈活性以及擴展性。
+
+舉例來說，如果在 ViewModel 中的 LiveData 可以在 Fragment 中被修改，從架構上來說，這是一個非常大的禁忌，因為 Fragment 基本上不應該進行數據的處理或修改
+，也同時說明 LiveData 沒有正確的被「封裝」。此狀況中，好的封裝做法是 Fragment 中可以去「讀取」LiveData 但無法「修改」LiveData，在 ViewModel 則可以
+「讀取」也可以「修改」 LiveData。
+
+
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+// Q2 // Try to explain what enum is and why we use them.
+
+對於同一個類別，絕大多數的物件都有自己的屬性組合，就像一個產品會有各自的名稱、價格、材質等。
+而有些類別，它的物件就只有固定那幾個而已。例如網站的會員級別可分為銅、銀、金，大學的學院可分為商業、語文、電資、藝術等。
+像這種只有固定物件的類別，可以採用「列舉」（enumeration）的概念來設計。其好處就有：
+1. 新增物件容易
+2. 訪問物件容易
+3. 程式的可讀性很好
+
+
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+// Q3 // How to use enum in Kotlin? Attach a sample code that uses enum in Kotlin.
+
+「enum 列舉」 的使用範例：
+
+/* 在 Kotlin 中，0xFF0000 是一個十六進位制整數字面值「0x」，表示紅色的 RGB 值。這是一種常件的方式來表示顏色值，
+    其中前兩位「FF」表示紅色的分量，接下來兩位「00」表示綠色的分量，最後兩位「00」表示藍色的分量。 */
+
+enum class Color(val rgb: Int) {
+    RED(0xFF0000),      // ()中放參數 rgb
+    GREEN(0x00FF00),
+    BLUE(0x0000FF);     // 列舉與方法之間要加上分號「;」
+
+    fun printRGB() {
+        println("RGB: $rgb")
+    }
+}
+
+fun main() {
+    val redColor: Color = Color.RED
+    println("RGB of RED: ${redColor.rgb}")   // RGB of RED: 16711680
+    redColor.printRGB()                      // RGB: 16711680
+
+    println(redColor.ordinal)                // 0，index 0 的位置
+    println(redColor.rgb)                    // 16711680
+
+    println(Color.GREEN)                     // 16711680
+    println(Color.GREEN.ordinal)             // 1，index 1 的位置
+
+    for (col in Color.values()) {            // 使用 for 和列舉的 .values() 方法印出列舉項目
+        println(col)                         // RED GREEN BLUE
+    }
+
+    val p = Color.valueOf("RED")             // 使用 .valueOf() 方法訪問列舉內容
+    println(p.rgb)                           // 16711680
+    println(p.ordinal)                       // 0
+}
+
+
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+// Q4 // What are the differences between LinearLayout and RelativeLayout? Try to explain in
+detail.
+
+LinearLayout 通常用於比較簡單的排列佈局，方向、位置都比較容易控制，分成垂直編排「vertical」（預設），還有是水平編排「horizontal」，程式碼較清楚。
+
+
+RelativeLayout 用於稍微複雜一點的排列佈局，通常會先寫位置最確定的元件，然後其他元件再依靠與父層或其他元件的「相對」位置去做佈局，程式碼較複雜。
+
+
+
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+// Q5 // Try to explain the benefits of ConstraintLayout. Why should you use it?
+
+ConstraintLayout 的好處就是使用上非常的直覺，可以直接將元件放在想放的位置，然後去設定元件位置的「約束值」即可，其出現於 LinearLayout 和 RelativeLayout
+之後，功能相對於他們更強大，可以處理更複雜的佈局例如「根據中心的元件，其他元件按照角度來定位佈局」、「同一水平方向，多個元件排列，中間的元件長度變化變化不影響邊緣的元件顯示」
+、「圖片按照一定比例顯示」...諸如此類常見的需求，如果不使用 ConstraintLayout，只使用 LinearLayout 或 RelativeLayout 來實現，那就只能動態獲取相應的文字寬度、
+圖片的大小比例，之後再去計算填充到佈局裡中。
+
+
+
