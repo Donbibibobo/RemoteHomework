@@ -1,0 +1,49 @@
+<Q1,Q2,Q3,Q4,Q5>
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+// Q1 // 1. What is Polymorphism? Try to explain in Mandarin.
+
+常見的「多型」會以類似這樣的型態出現「val/var 變數名稱: 父類類型 = 子類 instance」，多型的主要目的是讓程式具有「可讀性」、「維護性」以及最重要的「擴充性」。
+在 kotlin 中的「抽象類別」與「介面」常常就是用來設計「多型」的工具，先定義一個抽象的概念以及他身上方法能或屬性，讓子類去繼承和實作後，再進行使用。
+
+舉例：
+定義一個抽象的概念「Animals 動物」有 talk()、eat()、mating()三種「功能」，定義完才去延伸具體的型態，例如「狗」、「貓」，
+以繼承的概念來說，「Animals」是父類別，「狗」、「貓」是子類別，因為繼承了「Animals 動物」所以以也有了父層「功能」
+
+設計完後可以使用例如 val animals: Animals = listOf<Animals>(Cat(), Dog()) 的形式來使用設計好的「多型」，讓程式更具可讀性、維護性及擴充性。
+
+補充：此狀況下如果想要使用子類中另外設計的「函式」，可以做「向下轉型 Downcast」，來將父類類型變數轉會為子類類型，就可以使用子類中的方法了。
+
+
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+// Q2 // Here are the 7 important lifecycle methods of an Activity, try to explain when they are called during the lifecycle of Activity.
+
+i. onCreate(): Activity 啟動後第一個呼叫的方法，此方法會初始化 setContentLayout() 並繪製畫面。
+ii. onStart(): 進入 onStart 後畫開始「可被看見」，但還不能進行「互動」。
+iii. onResume(): 此狀態開始可以與畫面「互動」。
+iv. onPause(): 在 Activity 失去焦點時調用，此時不可與畫面「互動」。
+v. onStop(): 當 Activity 「不可被看見」時調用，例如跳到桌面，會暫時儲存資料。
+vi. onDestroy(): Activity 完全銷毀時調用。
+
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+// Q3 // What is the Android Jetpack?
+
+Jetpack 包含一系列程式庫，可協助開發人員遵循最佳做法、減少樣板程式碼，以及編寫在各種 Android 版本和裝置中都能維持一致運作方式的程式碼，讓開發人員能專心處理重要的程式碼。
+Android 每一版新增的功能，以前會放在「Android Support Library」的函式庫，現在已經移到「AndroidX」中，X 代表 Extensions 擴充的簡寫，而「AndroidX」也被納入在 Android Jetpack 類別庫裡。
+
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+// Q4 // What is Coroutines? Why do we use it? Try to explain in Mandarin.
+在 Kotlin 中有 coroutines 來高效率地處理長時間的任務，他可以將你「基於回調函示的程式碼」轉換成「順序執行的程式碼」，「順序編寫」的程式碼將更容易閱讀，甚至還可以用「Exception」。
+coroutines 的特色有：
+    - Asynchronous 異步執行：coroutines 獨立執行於「主要執行步驟」，這可能是在單獨的處理器上並行的，也可能是在應用程式的其餘部分（像是等但使用者輸入）時偷偷執行的。
+    - Non-blocking 無阻塞：系統不會阻塞 Main thread，因此使用者始終擁有流暢體驗。
+    - Sequential code 順序程式碼：使用 suspend 方法讓「異步程式碼變成順序編寫」，「suspend」是 kotlin 標記「coroutines」可用的函式或函數類型時用的關鍵字，當 coroutines 調用標記為suspend 的函數時，不會像普通函數調用那樣阻塞直到該函數返回，而是「掛起來去執行」直到結果準備好，直到結果準備好為止，然後從上次中斷的地方恢復執行。
+
+在 kotlin 中要使用 coroutines，你會需要以下東西：
+    - Job：基本上 Job 是任何可以被取消的事，所有 coroutines 都有一個 Job，你也可以用它來取消 coroutines。
+    - Dispatcher：dispatcher 發送 coroutines 去跑不同的執行緒，例如「dispatcher.main」會在主執行緒中執行任務。
+    - Scope：scope 結合了訊息，包括 Job 和 Dispatcher，來定義 coroutines 運行的內容，scope 會持續追蹤 coroutines。
+
+
+
+
+
